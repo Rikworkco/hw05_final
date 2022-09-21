@@ -148,5 +148,4 @@ class CreateFormTests(TestCase):
             reverse('posts:post_detail', kwargs={'post_id': post_new.pk}),
         )
         self.assertEqual(response.context['comments'][0].text,
-            form_data['text']
-        )
+        form_data['text'])
