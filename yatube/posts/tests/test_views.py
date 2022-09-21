@@ -22,6 +22,7 @@ TEMLATES_PAGES = {
         'posts/profile.html',
 }
 
+
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostPagesTests(TestCase):
     @classmethod
@@ -160,7 +161,8 @@ class PostPagesTests(TestCase):
         )
         # Post_detail отображается корректно
         response = self.auth_client.get(
-            reverse('posts:post_detail', kwargs={'post_id': f'{int(post_new.pk)}'})
+            reverse('posts:post_detail',
+            kwargs={'post_id': f'{int(post_new.pk)}'}),
         )
         expect_answer = {
             response.context['post'].pk: post_new.pk,
@@ -261,7 +263,7 @@ class FollowTests(TestCase):
             )
         )
         self.assertFalse(self.user.follower.exists())
-    
+
     def test_new_post_shown_in_feed_subscriber(self):
         """Пост появляется в ленте подписанного пользователя."""
         Follow.objects.create(user=self.user, author=self.author)
