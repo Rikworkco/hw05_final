@@ -75,7 +75,7 @@ class CreateFormTests(TestCase):
                          form_data_new['text'])
 
     def cheking_context(self, expect_answer):
-        """Проверка контекста страниц. Костыль для test_create_post_with_img."""
+        """Проверка контекста страниц.Костыль для test_create_post_with_img."""
         for obj, answer in expect_answer.items():
             with self.subTest(obj=obj):
                 resp_context = obj
@@ -106,7 +106,9 @@ class CreateFormTests(TestCase):
             reverse('posts:post_create'), data=form_data, follow=True
         )
         self.assertRedirects(
-            response, reverse('posts:profile', kwargs={'username': CreateFormTests.user})
+            response, reverse(
+                'posts:profile',
+                kwargs={'username': CreateFormTests.user})
         )
         self.assertEqual(Post.objects.count(), post_count + 1)
         last_post = Post.objects.order_by('-pk')[0]
@@ -134,7 +136,9 @@ class CreateFormTests(TestCase):
             follow=True,
         )
         self.assertRedirects(
-            response, reverse('posts:post_detail', kwargs={'post_id': post_new.pk})
+            response, reverse(
+                'posts:post_detail',
+                kwargs={'post_id': post_new.pk})
         )
         self.assertEqual(Comment.objects.count(), comments_count + 1)
         # Проверяем, что создался комментарий
@@ -143,4 +147,6 @@ class CreateFormTests(TestCase):
         response = self.authorized_client.get(
             reverse('posts:post_detail', kwargs={'post_id': post_new.pk}),
         )
-        self.assertEqual(response.context['comments'][0].text, form_data['text'])
+        self.assertEqual(response.context['comments'][0].text,
+        form_data['text']
+        )

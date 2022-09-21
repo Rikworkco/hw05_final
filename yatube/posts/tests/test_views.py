@@ -150,28 +150,28 @@ class PostPagesTests(TestCase):
             b"\x0A\x00\x3B"
         )
         uploaded = SimpleUploadedFile(
-            name="small.gif", content=small_gif, content_type="image/gif"
+            name='small.gif', content=small_gif, content_type='image/gif'
         )
         post_new = Post.objects.create(
             author=PostPagesTests.author,
-            text="Текст",
+            text='Текст',
             group=PostPagesTests.group,
             image=uploaded,
         )
         # Post_detail отображается корректно
         response = self.auth_client.get(
-            reverse("posts:post_detail", kwargs={"post_id": f"{int(post_new.pk)}"})
+            reverse('posts:post_detail', kwargs={'post_id': f'{int(post_new.pk)}'})
         )
         expect_answer = {
-            response.context["post"].pk: post_new.pk,
-            str(response.context["post"]): post_new.text,
-            response.context["user"]: post_new.author,
-            response.context["post"].image: post_new.image,
+            response.context['post'].pk: post_new.pk,
+            str(response.context['post']): post_new.text,
+            response.context['user']: post_new.author,
+            response.context['post'].image: post_new.image,
         }
         self.checking_context(expect_answer)
         # Пост на index отображается корректно
-        response = self.auth_client.get(reverse("posts:index"))
-        first_obj = response.context["page_obj"][0]
+        response = self.auth_client.get(reverse('posts:index'))
+        first_obj = response.context['page_obj'][0]
         obj_auth_0 = first_obj.author
         obj_text_0 = first_obj.text
         obj_id = first_obj.pk
@@ -183,14 +183,14 @@ class PostPagesTests(TestCase):
             obj_img: post_new.image,
         }
         self.checking_context(expect_answer)
-
         # Пост на странице группы отображается корректно
         response = self.auth_client.get(
             reverse(
-                "posts:group_list", kwargs={"slug": f"{PostPagesTests.group.slug}"}
+                'posts:group_list',
+                kwargs={'slug': f'{PostPagesTests.group.slug}'}
             )
         )
-        first_obj = response.context["page_obj"][0]
+        first_obj = response.context['page_obj'][0]
         obj_text_0 = first_obj.text
         obj_id = first_obj.pk
         obj_img = first_obj.image
@@ -200,10 +200,11 @@ class PostPagesTests(TestCase):
             obj_img: post_new.image,
         }
         self.checking_context(expect_answer)
-
         # Пост на странице автора отображается корректно
         response = self.auth_client.get(
-            reverse("posts:profile", kwargs={"username": f"{PostPagesTests.author}"})
+            reverse(
+                'posts:profile',
+                kwargs={'username': f'{PostPagesTests.author}'})
         )
         first_obj = response.context["page_obj"][0]
         obj_text_0 = first_obj.text

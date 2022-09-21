@@ -102,8 +102,9 @@ def post_edit(request, post_id):
     }
     return render(request, 'posts/create_post.html', context)
 
+
 @login_required
-def add_comment(request,post_id):
+def add_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
@@ -113,18 +114,20 @@ def add_comment(request,post_id):
         comment.save()
     return redirect('posts:post_detail', post_id=post_id)
 
+
 @login_required
 def follow_index(request):
     follower_user = request.user
-    following_authors = Follow.objects.filter(user=follower_user).values('author')
-    posts = Post.objects.filter(author__in=following_authors)
+    fol_authors = Follow.objects.filter(user=follower_user).values('author')
+    posts = Post.objects.filter(author__in=fol_authors)
     page_obj = get_paginated_post(request, posts)
     context = {
         'page_obj': page_obj,
-        'following_authors': following_authors,
+        'fol_authors': fol_authors,
 
     }
     return render(request, 'posts/follow.html', context)
+
 
 @login_required
 def profile_follow(request, username):
@@ -135,6 +138,7 @@ def profile_follow(request, username):
             return redirect('posts:profile', username=username)
     else:
         return redirect('posts:index')
+
 
 @login_required
 def profile_unfollow(request, username):
