@@ -47,7 +47,7 @@ class PostPagesTests(TestCase):
     def tearDownClass(cls):
         super().tearDownClass()
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
-    
+
     def setUp(self):
         self.guest_client = Client()
         self.authorized_client = Client()
@@ -162,7 +162,7 @@ class PostPagesTests(TestCase):
         # Post_detail отображается корректно
         response = self.auth_client.get(
             reverse('posts:post_detail',
-            kwargs={'post_id': f'{int(post_new.pk)}'}),)
+                     kwargs={'post_id': f'{int(post_new.pk)}'}),)
         expect_answer = {
             response.context['post'].pk: post_new.pk,
             str(response.context['post']): post_new.text,
