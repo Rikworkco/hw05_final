@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Custom 404{% endblock %}
+{% block content %}
+  <h1>Custom 404</h1>
+  <p>Страницы с адресом {{ path }} не существует</p>
+  <img src='https://cs5.pikabu.ru/images/big_size_comm/2014-07_5/14062016829969.jpg'>
+  <p>Это не то, что ты ищешь</p>
+  <a href="{% url 'posts:index' %}">Уйти на главную</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+Последние обновления у избранных авторов
+{% endblock %}
+{% block content %}
+    {% include 'includes/switcher.html' %}
+      <div class="container py-5">     
+        <h1>Последние обновления у избранных авторов</h1>
+        {% for post in page_obj %}
+        <hr>
+        {% include 'includes/post_feed_card.html' with display_group_link=True %}
+        {%endfor%}
+      </div>
+    {% include 'includes/paginator.html' %}
+{% endblock %}
