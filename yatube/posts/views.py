@@ -33,7 +33,7 @@ def profile(request, username):
     page_obj = get_paginated_post(request, posts)
     following = None
     following = request.user.is_authenticated and (
-    author.following.filter(user=request.user).exists())
+        author.following.filter(user=request.user).exists())
     context = {
         'page_obj': page_obj,
         'author': author,
