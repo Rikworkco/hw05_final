@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %} Профайл пользователя {{ author.username }} {% endblock %}
 {% block content %}
 <div class="mb-5">
   <h1>Все посты пользователя {{ author.get_full_name }}</h1>
