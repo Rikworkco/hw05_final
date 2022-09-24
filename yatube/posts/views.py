@@ -31,8 +31,7 @@ def profile(request, username):
     author = get_object_or_404(User, username=username)
     posts = author.posts.all()
     page_obj = get_paginated_post(request, posts)
-    following = None
-    following = request.user.is_authenticated and (
+    following = (request.user.is_authenticated and
         author.following.filter(user=request.user).exists())
     context = {
         'page_obj': page_obj,
@@ -46,11 +45,7 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     form = CommentForm(request.POST or None)
     comments = post.comments.all()
-    if form.is_valid():
-        comment = form.save(commit=False)
-        comment.post = post
-        comment.save()
-        return redirect('posts:post_detail', post_id=post_id)
+    form = CommentForm()
     context = {
         'form': form,
         'post': post,

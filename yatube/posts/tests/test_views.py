@@ -241,7 +241,7 @@ class FollowTests(TestCase):
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
 
-    def test_authorized_user_subscribe_unsubscribe(self):
+    def test_authorized_user_subscribe(self):
         """Пользователь может подписываться."""
         self.assertFalse(self.user.follower.exists())
         self.authorized_client.get(
