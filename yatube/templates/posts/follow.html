@@ -8,7 +8,9 @@
         <h1>Последние обновления у избранных авторов</h1>
         {% for post in page_obj %}
         <hr>
+        <li class="list-group-item">
         {% include 'includes/post_feed_card.html' with display_group_link=True %}
+        </li>
         {%endfor%}
       </div>
     {% include 'includes/paginator.html' %}
