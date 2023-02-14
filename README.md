@@ -1,3 +1,28 @@
-# hw05_final
+# yatube_project
+Социальная сеть блогеров
+### Описание
+Благодаря этому проекту можно будет делиться своими мыслями и идеями.
+Доступны: регистрация пользователей, публикация постов (в том числе и с изображениями), подписка на избранных авторов, возможность комментировать посты.
+### Технологии
+* Python 3.8
+* Django 2.2.16
+### Запуск проекта в dev-режиме 
+- Установите и активируйте виртуальное окружение (пример указан для Windows тут и ниже)
+```
+python -m venv venv
+source venv/Scripts/activate
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+```
+- Установите зависимости из файла requirements.txt
+```
+pip install -r requirements.txt
+``` 
+- В папке с файлом manage.py выполните команды:
+```
+python manage.py migrate
+python manage.py runserver
+```
+- В проекте есть тесты, для запуска в папке с файлом manage.py выполните команду:
+```
+py manage.py test
+```
