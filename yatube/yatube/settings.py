@@ -30,6 +30,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'testserver',
+    'www.Rikworkco.pythonanywhere.com',
+    'Rikworkco.pythonanywhere.com',
 ]
 
 
